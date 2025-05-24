@@ -1,0 +1,19 @@
+# Use the official NGINX image as a base
+FROM nginx:alpine
+
+# Set working directory inside container
+WORKDIR /usr/share/nginx/html
+
+# Remove the default nginx static files
+RUN rm -rf ./*
+
+# Copy all your static frontend files into nginx's root directory
+COPY index.html .
+COPY style.css .
+COPY script.js .
+
+# Expose port 80
+EXPOSE 5050
+
+# Default command to run nginx in foreground
+CMD ["nginx", "-g", "daemon off;"]
